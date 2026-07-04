@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import RegisterForm from '../components/RegisterForm';
+---
+
+<Layout title="Registrarse - UniShare">
+  <Navbar client:load />
+
+  <main class="flex-1 flex items-center justify-center py-16 min-h-[75vh] bg-[radial-gradient(circle_at_50%_50%,rgba(99,102,241,0.02)_0%,transparent_75%)]">
+    <div class="max-w-7xl mx-auto px-6 flex justify-center items-center w-full">
+      <RegisterForm client:load />
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

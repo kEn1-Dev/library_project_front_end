@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
+import DashboardStats from '../../components/DashboardStats';
+---
+
+<Layout title="Panel de Administración - UniShare">
+  <script is:inline>
+    // Guard de seguridad inmediato en el navegador para evitar destellos de contenido
+    const user = JSON.parse(localStorage.getItem('user') || 'null');
+    const token = localStorage.getItem('token');
+    if (!token || !user || user.id_rol !== 1) {
+      window.location.href = '/login';
+    }
+  </script>
+
+  <Navbar client:load />
+
+  <main class="flex-1 py-12">
+    <div class="max-w-7xl mx-auto px-6 w-full">
+      <DashboardStats client:only="react" />
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

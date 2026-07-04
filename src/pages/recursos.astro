@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import ResourcesExplorer from '../components/ResourcesExplorer';
+---
+
+<Layout title="UniShare - Biblioteca de Recursos Académicos">
+  <Navbar client:load />
+
+  <main class="flex-1 max-w-7xl mx-auto px-6 py-12 w-full">
+    <ResourcesExplorer client:load />
+  </main>
+
+  <Footer />
+</Layout>

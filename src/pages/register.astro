@@ -14,5 +14,12 @@ import RegisterForm from '../components/RegisterForm';
     </div>
   </main>
 
+  <!-- Redirect if session exists -->
+  <script is:inline>
+    if (localStorage.getItem('token') && localStorage.getItem('user')) {
+      window.location.href = '/recursos';
+    }
+  </script>
+
   <Footer />
 </Layout>

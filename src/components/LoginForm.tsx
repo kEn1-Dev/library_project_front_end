@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
 const API_BASE_URL = 'http://187.127.45.180:3000';
+const EMAIL_DOMAIN = '@UniShare.com';
 
 export default function LoginForm() {
-  const [correo, setCorreo] = useState('');
+  const [correoPrefix, setCorreoPrefix] = useState('');
   const [contrasena, setContrasena] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -13,7 +14,7 @@ export default function LoginForm() {
     e.preventDefault();
     setError(null);
 
-    if (!correo || !contrasena) {
+    if (!correoPrefix || !contrasena) {
       setError('Todos los campos son obligatorios.');
       return;
     }
@@ -21,6 +22,7 @@ export default function LoginForm() {
     setLoading(true);
 
     try {
+      const correo = `${correoPrefix.trim()}${EMAIL_DOMAIN}`;
       const response = await fetch(`${API_BASE_URL}/api/users/login`, {
         method: 'POST',
         headers: {
@@ -77,19 +79,24 @@ export default function LoginForm() {
       )}
 
       <form onSubmit={handleSubmit}>
-        <div className="mb-5 flex flex-col">
+        <div className="mb-4 flex flex-col">
           <label className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">
             Correo Electrónico
           </label>
-          <input
-            type="email"
-            className="px-4 py-3 text-sm border border-slate-200 rounded-xl outline-none focus:border-brand-indigo focus:ring-4 focus:ring-indigo-100 transition-all"
-            placeholder="correo@ejemplo.com"
-            value={correo}
-            onChange={(e) => setCorreo(e.target.value)}
-            disabled={loading || success}
-            required
-          />
+          <div className="flex items-center border border-slate-200 rounded-xl bg-white focus-within:border-brand-indigo focus-within:ring-4 focus-within:ring-indigo-100 transition-all overflow-hidden w-full">
+            <input
+              type="text"
+              className="px-4 py-3 text-sm outline-none w-full bg-transparent border-none"
+              placeholder="nombre.usuario"
+              value={correoPrefix}
+              onChange={(e) => setCorreoPrefix(e.target.value.replace(/@/g, ''))}
+              disabled={loading || success}
+              required
+            />
+            <span className="text-sm font-extrabold text-slate-400 bg-slate-50 border-l border-slate-200 px-4 py-3 select-none h-full flex items-center">
+              {EMAIL_DOMAIN}
+            </span>
+          </div>
         </div>
 
         <div className="mb-6 flex flex-col">

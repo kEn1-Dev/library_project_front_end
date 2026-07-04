@@ -113,7 +113,7 @@ export default function RegisterForm() {
               className="px-4 py-3 text-sm outline-none w-full bg-transparent border-none"
               placeholder="nombre.usuario"
               value={correoPrefix}
-              onChange={(e) => setCorreoPrefix(e.target.value)}
+              onChange={(e) => setCorreoPrefix(e.target.value.replace(/@/g, ''))}
               disabled={loading || success}
               required
             />

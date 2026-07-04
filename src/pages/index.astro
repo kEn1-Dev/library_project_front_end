@@ -24,7 +24,7 @@ import Footer from '../components/Footer';
           <p class="text-base md:text-lg text-slate-400 font-medium max-w-xl leading-relaxed mb-10">
             UniShare es la plataforma moderna y minimalista diseñada para que estudiantes y docentes compartan recursos académicos, libros y material de estudio de forma libre y colaborativa.
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto" id="hero-buttons">
             <a href="/register" class="px-6 py-3.5 text-sm font-bold rounded-full bg-gradient-brand text-white shadow-brand hover:opacity-95 hover:-translate-y-px transition-all btn-transition text-center">
               Comenzar Gratis
             </a>
@@ -160,7 +160,7 @@ import Footer from '../components/Footer';
           <p class="text-indigo-100 text-sm md:text-base max-w-md mb-8 leading-relaxed font-semibold">
             Comienza a descargar, visualizar y organizar todo tu material académico en un solo lugar.
           </p>
-          <a href="/register" class="px-8 py-4 text-sm font-extrabold rounded-full bg-white text-brand-navy hover:bg-slate-50 shadow-md hover:-translate-y-px transition-all btn-transition">
+          <a href="/register" id="cta-button" class="px-8 py-4 text-sm font-extrabold rounded-full bg-white text-brand-navy hover:bg-slate-50 shadow-md hover:-translate-y-px transition-all btn-transition">
             Crear Cuenta Gratis
           </a>
         </div>
@@ -168,6 +168,27 @@ import Footer from '../components/Footer';
     </section>
 
   </main>
+
+  <!-- Session checking script -->
+  <script is:inline>
+    if (localStorage.getItem('token') && localStorage.getItem('user')) {
+      document.addEventListener('DOMContentLoaded', () => {
+        const heroButtons = document.getElementById('hero-buttons');
+        if (heroButtons) {
+          heroButtons.innerHTML = `
+            <a href="/recursos" class="px-6 py-3.5 text-sm font-bold rounded-full bg-gradient-brand text-white shadow-brand hover:opacity-95 hover:-translate-y-px transition-all btn-transition text-center">
+              Ingresar a la Biblioteca
+            </a>
+          `;
+        }
+        const ctaButton = document.getElementById('cta-button');
+        if (ctaButton) {
+          ctaButton.setAttribute('href', '/recursos');
+          ctaButton.textContent = 'Ir a la Biblioteca';
+        }
+      });
+    }
+  </script>
 
   <!-- Footer -->
   <Footer />
